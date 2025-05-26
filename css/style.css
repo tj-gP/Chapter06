@@ -8,7 +8,9 @@ COLORS
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        
+       --text: #ddd;
+       --bg: #000;
+       --viedo-opacity: .7; 
     }
 }
 
@@ -22,7 +24,7 @@ body {
 	color: var(--text);
     background: var(--bg);
     font-family: 'Bree Serif', sans-serif;
-    
+    transition: .5s;    
 }
 
 /*
@@ -42,10 +44,18 @@ a:hover {
 HEADER
 ================================================ */
 header {
-    
+   position: relative;
+   margin-bottom: .5rem;
 }
 .header-text {
-    
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2; /* 추가 */
 }
 .header-title {
     font-size: 2rem;
@@ -58,30 +68,50 @@ header {
     font-size: 1.25rem;
 }
 .header-pattern {
-    
+    position: absolute;                                                                                                                             
+    z-index: 1;
+    background-size: auto auto;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, var(--bg) 2px, var(--bg) 4px);
 }
 header video {
-    
+    object-fit: cover;
+    object-position: center top;
+    opacity: var(--video-opacity);
+    width: 100vw;           
+    height: 90vh;
 }
 .header-text,
+.header-pattern,
 header video {
-    
+    width: 100vw;
+    height: 90vh;
 }
 
 /*
 GRID
 ================================================ */
 .grid {
-    
+    display: grid;
+    width: 94vw;
+    margin: 0 auto 3vw;
+    gap: 2vw;
+    grid-template-columns: 46vw 46vw;
+    grid-template-rows: 46vw 46vw 46vw 46vw 46vw 46vw 46vw 46vw;
 }
 .grid-item {
-    
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%);
 }
 .grid-big-top {
-    
+    grid-column: 1/3;
+    grid-row: 2/3;
 }
 .grid-big-bottom {
-    
+    grid-column: 1/3;
+    grid-row: 6/7;
 } 
 
 /*
@@ -99,10 +129,11 @@ footer {
 LIGHTBOX LUMINOUS
 ================================================ */
 .lum-lightbox.lum-open {
-    
+    z-index: 4;
 }
 .lum-lightbox-inner img {
-    
+    max-width: 120vw;
+    max-height: 80vh;
 }
 
 /*
@@ -115,15 +146,23 @@ DESKTOP SIZE
     }
 /* Grid */
     .grid {
-        
+        width: 80vw;
+        gap: 1vw;
+        grid-template-columns: repeat(3, 26vw); /* (80-2)/3 */
+        grid-template-rows: repeat(5,26vw);
     }
     .grid-big-bottom {
-        
+        grid-column: 2/4;
+        grid-row: 4/5;
     }
     .grid-item {
-        
+        transition: .3s;
     }
     .grid-item:hover {
-        
+       filter: grayscale(0);
+       box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+       transform: scale(1.1); 
+       z-index: 3;
+       position: relative;
     }
 }
